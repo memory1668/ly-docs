@@ -237,9 +237,9 @@ export default {
           //     区分单表单和多表单的情况
           let nodeItem = null
           if (!isMultiForm) {
-            nodeItem = this.$refs['easyForm'].$refs[item.prop]
+            nodeItem = this.$refs['easyForm'] && this.$refs['easyForm'].$refs[item.prop]
           } else {
-            nodeItem = this.$refs['easyForm' + formIndex][0].$refs[item.prop]
+            nodeItem = this.$refs['easyForm' + formIndex][0] && this.$refs['easyForm' + formIndex][0].$refs[item.prop]
           }
           if (!nodeItem) {
             return

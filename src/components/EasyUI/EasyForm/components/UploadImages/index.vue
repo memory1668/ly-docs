@@ -1,20 +1,20 @@
 <template>
   <div>
     <el-button icon="el-icon-upload2" @click="toggleShow">{{ placeholder }}</el-button>
-    <vue-image-corp-upload
-      ref="vueImageCorpUpload"
-      v-model="show"
-      field="file"
-      :width="width"
-      :height="height"
-      :params="params"
-      :headers="headers"
-      :url="url"
-      :img-format="imgFormat"
-      v-bind="$attrs"
-      @crop-upload-success="cropUploadSuccess"
-      @crop-upload-fail="cropUploadFail"
-    />
+<!--    <vue-image-corp-upload-->
+<!--      ref="vueImageCorpUpload"-->
+<!--      v-model="show"-->
+<!--      field="file"-->
+<!--      :width="width"-->
+<!--      :height="height"-->
+<!--      :params="params"-->
+<!--      :headers="headers"-->
+<!--      :url="url"-->
+<!--      :img-format="imgFormat"-->
+<!--      v-bind="$attrs"-->
+<!--      @crop-upload-success="cropUploadSuccess"-->
+<!--      @crop-upload-fail="cropUploadFail"-->
+<!--    />-->
 
     <div
       v-if="imageUrls && imageUrls.length > 0"
@@ -37,16 +37,16 @@
 </template>
 
 <script>
-import VueImageCorpUpload from 'vue-image-crop-upload'
+// import VueImageCorpUpload from 'vue-image-crop-upload'
 import { getToken } from '@/utils/auth'
 
 const MAX_PREVIEW = 200
 
 export default {
   name: 'UploadImages',
-  components: {
-    VueImageCorpUpload
-  },
+  // components: {
+  //   VueImageCorpUpload
+  // },
   props: {
     value: {
       type: Array,
@@ -75,7 +75,7 @@ export default {
       default: process.env.VUE_APP_BASE_API + '/file/upload'
     }
   },
-  data() {
+  data () {
     return {
       show: false,
       params: {
@@ -98,15 +98,15 @@ export default {
   },
 
   watch: {
-    imageUrls(val) {
+    imageUrls (val) {
       this.$emit('input', val)
     },
 
-    value(val) {
+    value (val) {
       this.imageUrls = val
     }
   },
-  created() {
+  created () {
     /**
        * 图片 url 数组
        * @type {default.props.value|{type, default}}
@@ -121,7 +121,7 @@ export default {
     /**
        * 计算预览的宽高
        */
-    calculatePreviewSize() {
+    calculatePreviewSize () {
       if (this.width < MAX_PREVIEW && this.height < MAX_PREVIEW) {
         this.preview = {
           width: this.width,
@@ -146,14 +146,14 @@ export default {
     /**
        * 显示和收起
        */
-    toggleShow() {
+    toggleShow () {
       this.show = !this.show
     },
 
     /**
        * 上传文件成功
        */
-    cropUploadSuccess(res, field) {
+    cropUploadSuccess (res, field) {
       !this.imageUrls && (this.imageUrls = [])
       this.imageUrls.push(res.data.url)
 
@@ -165,7 +165,7 @@ export default {
     /**
        * 上传文件失败
        */
-    cropUploadFail(status, field) {
+    cropUploadFail (status, field) {
       console.log(status)
       console.log('field: ' + field)
     },
@@ -174,7 +174,7 @@ export default {
      * 移除数组元素
      * @param index
      */
-    removeImage(index) {
+    removeImage (index) {
       this.$confirm('确定移除图片？', '操作确认').then((val) => {
         this.imageUrls.splice(index, 1)
       }).catch((error) => {

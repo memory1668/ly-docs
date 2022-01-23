@@ -6,20 +6,20 @@
       <el-button v-if="enableSearch || forceSearch" icon="el-icon-search" @click="toggleSearchDialog">搜图上传</el-button>
     </div>
 
-    <vue-image-corp-upload
-      ref="vueImageCorpUpload"
-      v-model="show"
-      field="file"
-      :width="width"
-      :height="height"
-      :params="params"
-      :headers="headers"
-      :url="url"
-      :img-format="imgFormat"
-      v-bind="$attrs"
-      @crop-upload-success="cropUploadSuccess"
-      @crop-upload-fail="cropUploadFail"
-    />
+<!--    <vue-image-corp-upload-->
+<!--      ref="vueImageCorpUpload"-->
+<!--      v-model="show"-->
+<!--      field="file"-->
+<!--      :width="width"-->
+<!--      :height="height"-->
+<!--      :params="params"-->
+<!--      :headers="headers"-->
+<!--      :url="url"-->
+<!--      :img-format="imgFormat"-->
+<!--      v-bind="$attrs"-->
+<!--      @crop-upload-success="cropUploadSuccess"-->
+<!--      @crop-upload-fail="cropUploadFail"-->
+<!--    />-->
     <img
       v-if="value !== ''"
       :style="{ width: preview.width + 'px', height: preview.height + 'px' }"
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import VueImageCorpUpload from 'vue-image-crop-upload'
+// import VueImageCorpUpload from 'vue-image-crop-upload'
 // import { getToken } from '@/utils/auth'
 // import DialogSelectSearchImage from '../DialogSelectSearchImage/index'
 
@@ -48,7 +48,7 @@ const MAX_PREVIEW = 200
 export default {
   name: 'UploadImage',
   components: {
-    VueImageCorpUpload
+    // VueImageCorpUpload
     // DialogSelectSearchImage
   },
   props: {
@@ -91,7 +91,7 @@ export default {
     }
   },
 
-  data: function() {
+  data: function () {
     return {
 
       // 搜图弹窗
@@ -120,14 +120,14 @@ export default {
     /**
      * 强制搜图
      */
-    forceSearch() {
+    forceSearch () {
       return this.searchImage && this.searchImage.force
     },
 
     /**
      * 是否开启搜图
      */
-    enableSearch() {
+    enableSearch () {
       return this.searchImage && this.searchImage.enable
     }
 
@@ -135,7 +135,7 @@ export default {
 
   watch: {
     value: {
-      handler(val) {
+      handler (val) {
         this.imageUrl = val
       }
     },
@@ -146,13 +146,13 @@ export default {
     searchUploadedUrl: {
       deep: true,
       // immediate: true,
-      handler(val) {
+      handler (val) {
         this.imageUrl = val
         this.$emit('input', this.imageUrl)
       }
     }
   },
-  created() {
+  created () {
     this.imageUrl = this.value
 
     // 计算显示的宽高
@@ -163,7 +163,7 @@ export default {
     /**
      * 监听表单的数据: 变更
      */
-    watchForm(val) {
+    watchForm (val) {
       console.log('invoke watch form: ', val)
       this.$refs['dialogSelectSearchImage'].watchForm(val)
     },
@@ -171,7 +171,7 @@ export default {
     /**
      * 计算预览的宽高
      */
-    calculatePreviewSize() {
+    calculatePreviewSize () {
       if (this.width < MAX_PREVIEW && this.height < MAX_PREVIEW) {
         this.preview = {
           width: this.width,
@@ -196,21 +196,21 @@ export default {
     /**
      * 显示和收起
      */
-    toggleShow() {
+    toggleShow () {
       this.show = !this.show
     },
 
     /**
      * 搜图框显示和隐藏
      */
-    toggleSearchDialog() {
+    toggleSearchDialog () {
       this.dialogSearchVisible = !this.dialogSearchVisible
     },
 
     /**
      * 上传文件成功
      */
-    cropUploadSuccess(jsonData, field) {
+    cropUploadSuccess (jsonData, field) {
       this.imageUrl = jsonData.data.url
       this.$emit('input', this.imageUrl)
 
@@ -222,7 +222,7 @@ export default {
     /**
      * 上传文件失败
      */
-    cropUploadFail(status, field) {
+    cropUploadFail (status, field) {
       console.log(status)
       console.log('field: ' + field)
     }

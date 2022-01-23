@@ -24,6 +24,6 @@ git commit -m 'deploy'
 
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 #git push -f https://${access_token}@github.com/liub1934/lb-element-table.git master:gh-pages
-git push -f https://${access_token}@git.v-yg.com/ruankangjie/ly-docs.git master:gh-pages
+git push -f git@github.com:memory1668/ly-docs.git master:gh-pages
 
 cd -

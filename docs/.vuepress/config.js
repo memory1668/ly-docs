@@ -21,7 +21,7 @@ for (const key in env) {
 }
 
 module.exports = {
-  base: '/ly-form/',
+  base: '/ly-docs/',
   locales: {
     '/zh/': {
       lang: 'zh-CN',
